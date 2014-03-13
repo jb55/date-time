@@ -106,7 +106,7 @@ function Transformer ( date, locale ) {
   if ( hours == 0 ) hours = 12;
   minutes = date.getMinutes();
   seconds = date.getSeconds();
-  ampm = this.hours >= 12 ? locale.pm : locale.am;
+  ampm = hours >= 12 ? locale.pm : locale.am;
 
   this.map = {
     "Y": year,

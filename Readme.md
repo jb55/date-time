@@ -20,6 +20,8 @@ el.innerHTML = DateTime.format("F j, Y", new Date());
 
 This function will optionally take a format string, a date object, and a locale object. The formatting options are copied/inspired from the PHP date formating function to make it easier to remember.
 
+By default the function will return the current date with the format `F j, Y`.
+
 | Key | Example | Details |
 |:---:|:-------:|:--------|
 | Y | 2014 | Year full |
