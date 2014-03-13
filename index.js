@@ -85,6 +85,18 @@ DateTime.format = function ( format, date, locale ) {
   format = format || "F j, Y";
   date = date || new Date();
   locale = locale || DateTime.locale;
+  transformer = new Transformer(date, locale);
+  str = "";
+
+  for ( var i = 0; i < format.length; i++ ) {
+    str += transformer.transform(format.charAt(i));
+  }
+
+  return str;
+};
+
+function Transformer ( date, locale ) {
+  locale = locale;
   day = date.getDay();
   dayi = date.getDate();
   month = date.getMonth();
@@ -94,30 +106,34 @@ DateTime.format = function ( format, date, locale ) {
   if ( hours == 0 ) hours = 12;
   minutes = date.getMinutes();
   seconds = date.getSeconds();
-  ampm = hours >= 12 ? locale.pm : locale.am;
-  str = format;
-  str = str.replace(/[Y]/g, year);
-  str = str.replace(/[y]/g, String(year).slice(2, 4));
-  str = str.replace(/[F]/g, locale.months.full[month]);
-  str = str.replace(/[M]/g, locale.months.short[month]);
-  str = str.replace(/[n]/g, month + 1);
-  str = str.replace(/[m]/g, ("0" + (month + 1)).slice(-2));
-  str = str.replace(/[d]/g, ("0" + (dayi + 1)).slice(-2));
-  str = str.replace(/[d]/g, dayi + 1);
-  str = str.replace(/[D]/g, locale.days.short[day]);
-  str = str.replace(/[l]/g, locale.days.full[day]);
-  str = str.replace(/[a]/g, ampm.toLowerCase());
-  str = str.replace(/[A]/g, ampm);
-  str = str.replace(/[g]/g, hours12);
-  str = str.replace(/[G]/g, hours);
-  str = str.replace(/[h]/g, ("0" + hours12).slice(-2));
-  str = str.replace(/[H]/g, ("0" + hours).slice(-2));
-  str = str.replace(/[i]/g, ("0" + minutes).slice(-2));
-  str = str.replace(/[I]/g, minutes);
-  str = str.replace(/[s]/g, ("0" + seconds).slice(-2));
-  str = str.replace(/[S]/g, seconds);
+  ampm = this.hours >= 12 ? locale.pm : locale.am;
 
-  return str;
+  this.map = {
+    "Y": year,
+    "y": String(year).slice(2, 4),
+    "F": locale.months.full[month],
+    "M": locale.months.short[month],
+    "n": month + 1,
+    "m": ("0" + (month + 1)).slice(-2),
+    "d": ("0" + (dayi + 1)).slice(-2),
+    "j": dayi + 1,
+    "D": locale.days.short[day],
+    "l": locale.days.full[day],
+    "a": ampm.toLowerCase(),
+    "A": ampm,
+    "g": hours12,
+    "G": hours,
+    "h": ("0" + hours12).slice(-2),
+    "H": ("0" + hours).slice(-2),
+    "i": ("0" + minutes).slice(-2),
+    "I": minutes,
+    "s": ("0" + seconds).slice(-2),
+    "S": seconds
+  };
+};
+
+Transformer.prototype.transform = function ( character ) {
+  return this.map[character] || character;
 };
 
 module.exports = DateTime;
