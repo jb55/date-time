@@ -111,4 +111,8 @@ DateTime.format = function ( format, date, locale ) {
   return str;
 };
 
+DateTime.parseShortYear = function ( year ) {
+  return parseInt(year.toString().match(/\d{2}$/)[0]);
+};
+
 module.exports = DateTime;
