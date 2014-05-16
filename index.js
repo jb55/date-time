@@ -115,4 +115,15 @@ DateTime.parseShortYear = function ( year ) {
   return parseInt(year.toString().match(/\d{2}$/)[0]);
 };
 
+// SEE http://stackoverflow.com/questions/4060004/calculate-age-in-javascript/7091965#7091965
+DateTime.getAge = function ( birthDate ) {
+  var today = new Date();
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+  }
+  return age;
+}
+
 module.exports = DateTime;
