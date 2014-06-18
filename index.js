@@ -94,7 +94,7 @@ function Transformer ( date, locale ) {
 };
 
 Transformer.prototype.transform = function ( character ) {
-  return this.map[character] || character;
+  return this.map[character] != undefined ? this.map[character] : character;
 };
 
 DateTime.format = function ( format, date, locale ) {
