@@ -64,7 +64,7 @@ function Transformer ( date, locale ) {
   year = date.getFullYear();
   hours = date.getHours();
   hours12 = hours % 12;
-  if ( hours == 0 ) hours = 12;
+  if ( hours12 == 0 ) hours12 = 12;
   minutes = date.getMinutes();
   seconds = date.getSeconds();
   ampm = hours >= 12 ? locale.pm : locale.am;

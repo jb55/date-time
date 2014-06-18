@@ -7,13 +7,17 @@
     <h1>Date Time</h1>
     <label class="input">2014-06-16T19:08:25.846Z</label>
     <br/>
+    <label class="date-string"></label>
+    <br/>
     <label class="output"></label>
     <script src="./build/build.js"></script>
     <script>
       var DateTime = require("date-time");
       var format = "F j, Y g:i A";
       var input = document.querySelector(".input").textContent;
-      document.querySelector(".output").textContent = DateTime.format(format, new Date(input));
+      var date = new Date(input);
+      document.querySelector(".date-string").textContent = date;
+      document.querySelector(".output").textContent = DateTime.format(format, date);
     </script>
   </body>
 </html>
