@@ -7,7 +7,7 @@ DateTime.locale = {
   months: {
     full: [
       "Janurary",
-      "Feburary",
+      "February",
       "March",
       "April",
       "May",
