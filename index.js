@@ -6,7 +6,7 @@ DateTime.locale = {
   pm: "PM",
   months: {
     full: [
-      "Janurary",
+      "January",
       "February",
       "March",
       "April",
